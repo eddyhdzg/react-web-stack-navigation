@@ -1,16 +1,11 @@
 import { Route, Link, Switch, useRouteMatch } from "react-router-dom";
-import { Button, Typography } from "@material-ui/core";
-import useBreadcrumbs from "../../hooks/useBreadcrumbs";
+import { Button } from "@material-ui/core";
 import { categories } from "../../constants/index";
 import useStyles from "./routingExample.jss";
-
-export interface MatchParams {
-  sectionId: string;
-}
+import { MatchParams } from "../../types";
 
 const Category = () => {
   const match = useRouteMatch<MatchParams>();
-  const breadCrumbs = useBreadcrumbs();
   const classes = useStyles();
 
   const category = categories.find(
@@ -21,23 +16,6 @@ const Category = () => {
     <>
       {match.isExact && (
         <>
-          {breadCrumbs.length >= 2 && (
-            <Button
-              variant="contained"
-              color="primary"
-              component={Link}
-              to={breadCrumbs[breadCrumbs.length - 2].href}
-            >
-              Back
-            </Button>
-          )}
-
-          <Typography variant="h4">{category?.title}</Typography>
-
-          <Typography variant="subtitle2" gutterBottom color="textSecondary">
-            Level {breadCrumbs.length - 1}
-          </Typography>
-
           <div className={classes.routingExample_list}>
             {category?.subcategories.map((subCategoryId) => {
               return (
@@ -66,9 +44,11 @@ const Category = () => {
 
 const RoutingExample = () => {
   return (
-    <Switch>
-      <Route path={`/:sectionId`} component={Category} />
-    </Switch>
+    <>
+      <Switch>
+        <Route path={`/:sectionId`} component={Category} />
+      </Switch>
+    </>
   );
 };
 
