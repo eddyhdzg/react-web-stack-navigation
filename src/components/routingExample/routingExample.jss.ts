@@ -1,11 +1,15 @@
-import { createStyles, makeStyles } from "@material-ui/core/styles";
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 
-const useStyles = makeStyles(() =>
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    routingExample_list: {
+    routingExample_back: {
       display: "flex",
-      flexDirection: "column",
-      alignItems: "flex-start",
+      flexDirection: "row",
+      alignItems: "center",
+    },
+    routingExample_backButton: {
+      marginLeft: theme.spacing(1),
+      marginRight: theme.spacing(2),
     },
   })
 );
